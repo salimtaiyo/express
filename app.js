@@ -3,12 +3,26 @@ const express = require('express');
 
 const app = express();
 
+const colors = [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'blue',
+    'purple'
+  ];
+
+app.set('view engine', 'pug');
+
 app.get('/',(req, res) => {
-    res.send('<h1>Hello Express</h1>');
+    res.render('index');
 });
 
-app.get('/hello',(req, res) => {
-    res.send('<h1>Hello Javascript</h1>');
+app.get('/cards',(req, res) => {
+    // res.render('card', {prompt: "who is pug?", hint: "Dota 2, Valve"});
+    // res.locals.prompt = "Who is IceFrog?"
+    // res.render('card');
+    res.render('card', {prompt: "who is pug?", colors, hint:"icefrog"});
 });
 
 app.listen(3000, () => {
