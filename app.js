@@ -2,6 +2,9 @@
 const express = require('express');
 
 const app = express();
+const bodyParser = require('body-parser');
+
+const cookieParser = require('cookie-parser');
 
 const colors = [
     'red',
@@ -13,18 +16,21 @@ const colors = [
   ];
 
 app.set('view engine', 'pug');
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
 
-app.get('/',(req, res) => {
-    res.render('index');
-});
+//error handler
+// app.use((req,res,next) => {
+//     const err = new Error('Oh no');
+//     err.status = 500;
+//     next(err);
+// });
 
-app.get('/cards',(req, res) => {
-    // res.render('card', {prompt: "who is pug?", hint: "Dota 2, Valve"});
-    // res.locals.prompt = "Who is IceFrog?"
-    // res.render('card');
-    res.render('card', {prompt: "who is pug?", colors, hint:"icefrog"});
-});
 
 app.listen(3000, () => {
     console.log('The application is running on localhost:3000')
 });
+
+// if name
+// h2 Hello #{name}
+// else
